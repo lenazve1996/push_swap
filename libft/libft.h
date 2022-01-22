@@ -6,7 +6,7 @@
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 14:36:57 by ayajirob          #+#    #+#             */
-/*   Updated: 2022/01/22 13:22:19 by ayajirob@st      ###   ########.fr       */
+/*   Updated: 2022/01/22 18:15:48 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ void		ft_lstclear(t_list **lst, void (*del)(void*));
 void		ft_lstiter(t_list *lst, void (*f)(void *));
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int			ft_putstr_ret(char *s, int fd);
+int			ft_isdigit_orsign(int ch);
 
 #endif
