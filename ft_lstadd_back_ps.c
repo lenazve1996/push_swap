@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   ft_lstadd_back_ps.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayajirob <ayajirob@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 19:22:55 by ayajirob          #+#    #+#             */
-/*   Updated: 2021/12/05 15:38:51 by ayajirob         ###   ########.fr       */
+/*   Created: 2022/01/23 19:30:55 by ayajirob@st       #+#    #+#             */
+/*   Updated: 2022/01/23 19:32:34 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_back_ps(t_lst **lst, t_lst *new)
 {
-	t_list	*last_elem;
+	t_lst	*last_elem;
 
 	if (new != NULL && lst != NULL && *lst != NULL)
 	{
-		last_elem = ft_lstlast(*lst);
+		last_elem = ft_lstlast_ps(*lst);
 		last_elem->next = new;
 	}
 	else if (*lst == NULL)
 	{
-		ft_lstadd_front(lst, new);
+		ft_lstadd_front_ps(lst, new);
 	}
 }

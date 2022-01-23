@@ -1,20 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit_orsign.c                                :+:      :+:    :+:   */
+/*   ft_find_int_doubles.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/22 18:11:55 by ayajirob@st       #+#    #+#             */
-/*   Updated: 2022/01/23 12:33:40 by ayajirob@st      ###   ########.fr       */
+/*   Created: 2022/01/23 12:21:54 by ayajirob@st       #+#    #+#             */
+/*   Updated: 2022/01/23 19:12:29 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-int	ft_isdigit_orsign(int ch)
+int	ft_find_int_doubles(t_lst **stack_a)
 {
-	if ((ch >= '0' && ch <= '9') || ch == '-' || ch == '+' || ch == ' ')
-		return (1);
+	t_lst	*tmp_lst;
+	t_lst	*next_lst;
+	
+	tmp_lst = *stack_a;
+	while (tmp_lst != NULL)
+	{
+		next_lst = tmp_lst->next;
+		while (next_lst != NULL)
+		{
+			write(1, "here7\n", 6);
+			if (tmp_lst->numb == next_lst->numb)
+				return (1);
+			next_lst = next_lst->next;
+		}
+		tmp_lst = tmp_lst->next;
+	}
 	return (0);
 }

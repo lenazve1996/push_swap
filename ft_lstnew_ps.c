@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_lstnew_ps.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayajirob <ayajirob@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 18:22:49 by ayajirob          #+#    #+#             */
-/*   Updated: 2021/11/21 14:38:19 by ayajirob         ###   ########.fr       */
+/*   Created: 2022/01/23 18:44:01 by ayajirob@st       #+#    #+#             */
+/*   Updated: 2022/01/23 19:14:14 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-t_list	*ft_lstlast(t_list *lst)
+t_lst	*ft_lstnew_ps(int numb)
 {
-	if (lst == NULL)
+	t_lst	*new_element;
+
+	new_element = (t_lst *)malloc(sizeof(t_lst));
+	if (!new_element)
 		return (NULL);
-	while (lst->next != NULL)
-		lst = lst->next;
-	return (lst);
+	new_element->numb = numb;
+	new_element->next = NULL;
+	return (new_element);
 }
