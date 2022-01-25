@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayajirob <ayajirob@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 15:42:38 by ayajirob          #+#    #+#             */
-/*   Updated: 2021/12/05 15:42:39 by ayajirob         ###   ########.fr       */
+/*   Updated: 2022/01/25 14:45:58 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
-int	ft_atoi(const char *str)
+long long int	ft_atoi(const char *str)
 {
 	int				sign;
 	long long int	count;

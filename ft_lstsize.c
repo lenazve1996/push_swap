@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_find_int_doubles.c                              :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/23 12:21:54 by ayajirob@st       #+#    #+#             */
-/*   Updated: 2022/01/25 14:04:21 by ayajirob@st      ###   ########.fr       */
+/*   Created: 2022/01/25 15:17:53 by ayajirob@st       #+#    #+#             */
+/*   Updated: 2022/01/25 15:18:31 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_find_int_doubles(t_lst **stack_a)
+int	ft_lstsize(t_lst *lst)
 {
-	t_lst	*tmp_lst;
-	t_lst	*next_lst;
-	
-	tmp_lst = *stack_a;
-	while (tmp_lst != NULL)
+	int	list_length;
+
+	if (lst == NULL)
+		return (0);
+	list_length = 1;
+	while (lst->next != NULL)
 	{
-		printf("%d\n", tmp_lst->numb);
-		next_lst = tmp_lst->next;
-		while (next_lst != NULL)
-		{
-			if (tmp_lst->numb == next_lst->numb)
-				return (1);
-			next_lst = next_lst->next;
-		}
-		tmp_lst = tmp_lst->next;
+		lst = lst->next;
+		list_length++;
 	}
-	return (0);
+	return (list_length);
 }

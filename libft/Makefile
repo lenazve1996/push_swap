@@ -36,4 +36,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONE: clean fclean re all bonus
+.PHONY: clean fclean re all bonus
