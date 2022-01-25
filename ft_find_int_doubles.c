@@ -6,7 +6,7 @@
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 12:21:54 by ayajirob@st       #+#    #+#             */
-/*   Updated: 2022/01/25 14:04:21 by ayajirob@st      ###   ########.fr       */
+/*   Updated: 2022/01/25 19:33:32 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_find_int_doubles(t_lst **stack_a)
 	tmp_lst = *stack_a;
 	while (tmp_lst != NULL)
 	{
-		printf("%d\n", tmp_lst->numb);
+		//printf("%d\n", tmp_lst->numb);
 		next_lst = tmp_lst->next;
 		while (next_lst != NULL)
 		{
