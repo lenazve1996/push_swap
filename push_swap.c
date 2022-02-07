@@ -6,25 +6,149 @@
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 13:06:43 by ayajirob@st       #+#    #+#             */
-/*   Updated: 2022/01/25 19:36:50 by ayajirob@st      ###   ########.fr       */
+/*   Updated: 2022/02/07 17:59:42 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_sa()
+void	ft_sa(t_lst **stack_a, int write_flag)
 {
-	write(1, "sa\n", 3);
+	t_lst *tmp_elem;
+	t_lst *new_head;
+
+	tmp_elem = *stack_a;
+	new_head = tmp_elem->next;
+	tmp_elem->next = new_head->next;
+	new_head->next = tmp_elem;
+	*stack_a = new_head;
+	if (write_flag)
+		write(1, "sa\n", 3);
 }
 
-void	ft_rra()
+void	ft_sb(t_lst **stack_b, int write_flag)
 {
+	t_lst *tmp_elem;
+	t_lst *new_head;
+
+	if (stack_b!= NULL)
+	{
+		if (*stack_b != NULL && (*stack_b)->next != NULL)
+		tmp_elem = *stack_b;
+		new_head = tmp_elem->next;
+		tmp_elem->next = new_head->next;
+		new_head->next = tmp_elem;
+		*stack_b = new_head;
+		if (write_flag)
+			write(1, "sb\n", 3);
+	}
+}
+
+void	ft_ss(t_lst **stack_b, t_lst **stack_a)
+{	
+	ft_sa(stack_a, 0);
+	ft_sb(stack_b, 0);
+	write(1, "ss\n", 3);
+}
+
+void	ft_pa(t_lst **stack_b, t_lst **stack_a)
+{
+	t_lst *tmp_elem;
+	t_lst *new_head;
+
+	if (stack_b != NULL)
+	{
+		tmp_elem = *stack_b;
+		*stack_b = tmp_elem->next;
+		ft_lstadd_front_ps(stack_a, tmp_elem);
+	}
+	write(1, "pa\n", 3);
+}
+
+void	ft_pb(t_lst **stack_b, t_lst **stack_a)
+{
+	t_lst *tmp_elem;
+	t_lst *new_head;
+
+	if (stack_a != NULL)
+	{
+		tmp_elem = *stack_a;
+		*stack_a = tmp_elem->next;
+		ft_lstadd_front_ps(stack_b, tmp_elem);
+	}
+	write(1, "pb\n", 3);
+}
+
+void	ft_ra(t_lst **stack_a, int write_flag)
+{
+	t_lst *tmp_elem;
+	t_lst *last_elem;
+
+	tmp_elem = *stack_a;
+	*stack_a = tmp_elem->next;
+	last_elem = ft_lstlast_ps(*stack_a);
+	last_elem->next = tmp_elem;
+	tmp_elem->next = NULL;
+	if (write_flag)
+		write(1, "ra\n", 3);
+}
+
+void	ft_rb(t_lst **stack_a, int write_flag)
+{
+	t_lst *tmp_elem;
+	t_lst *last_elem;
+
+	tmp_elem = *stack_a;
+	*stack_a = tmp_elem->next;
+	last_elem = ft_lstlast_ps(*stack_a);
+	last_elem->next = tmp_elem;
+	tmp_elem->next = NULL;
+	if (write_flag)
+		write(1, "rb\n", 3);
+}
+
+void	ft_rr(t_lst **stack_a, t_lst **stack_b)
+{
+	ft_ra(stack_a, 0);
+	ft_rb(stack_b, 0);
 	write(1, "rra\n", 3);
 }
 
-void	ft_ra()
+void	ft_rra(t_lst **stack_a, int write_flag)
 {
-	write(1, "ra\n", 3);
+	t_lst *tmp_elem;
+	t_lst *last_elem;
+
+	last_elem = ft_lstlast_ps(*stack_a);
+	tmp_elem = *stack_a;
+	while (tmp_elem->next->next != NULL)
+		tmp_elem = tmp_elem->next;
+	tmp_elem->next = NULL;
+	ft_lstadd_front_ps(stack_a, last_elem);
+	if (write_flag)
+		write(1, "rra\n", 3);
+}
+
+void	ft_rrb(t_lst **stack_b, int write_flag)
+{
+	t_lst *tmp_elem;
+	t_lst *last_elem;
+
+	last_elem = ft_lstlast_ps(*stack_b);
+	tmp_elem = *stack_b;
+	while (tmp_elem->next->next != NULL)
+		tmp_elem = tmp_elem->next;
+	tmp_elem->next = NULL;
+	ft_lstadd_front_ps(stack_b, last_elem);
+	if (write_flag)
+		write(1, "rrb\n", 3);
+}
+
+void	ft_rrr(t_lst **stack_a, t_lst **stack_b)
+{
+	ft_rra(stack_a, 0);
+	ft_rrb(stack_b, 0);
+	write(1, "rrr\n", 3);
 }
 
 int ft_process_two_numbs(t_lst **stack_a)
@@ -33,7 +157,7 @@ int ft_process_two_numbs(t_lst **stack_a)
 
 	tmp_elem = *stack_a;
 	if (tmp_elem->numb > tmp_elem->next->numb)
-		ft_sa();
+		ft_sa(stack_a, 1);
 	return (0);
 }
 
@@ -48,27 +172,27 @@ int ft_process_three_numbs(t_lst **stack_a)
 	c = (*stack_a)->next->next->numb;
 	if (a < b && a < c && b > c)
 	{
-		ft_rra();
-		ft_sa();
+		ft_rra(stack_a, 1);
+		ft_sa(stack_a, 1);
 		return (0);
 	}
 	else if (a > b && b < c && a < c)
 	{
-		ft_sa();
+		ft_sa(stack_a, 1);
 	}
 	
 	else if (a < b && a > c && b > c)
 	{
-		ft_rra();
+		ft_rra(stack_a, 1);
 	}
 	else if (a > b && a > c && b < c)
 	{
-		ft_ra();
+		ft_ra(stack_a, 1);
 	}
 	else if (a > b & a > c && b > c)
 	{
-		ft_sa();
-		ft_ra();
+		ft_sa(stack_a, 1);
+		ft_ra(stack_a, 1);
 	}
 	return (0);
 }
@@ -76,7 +200,9 @@ int ft_process_three_numbs(t_lst **stack_a)
 int	ft_choose_algorithm(t_lst **stack_a)
 {
 	int		n;
+	t_lst	*stack_b;
 	
+	stack_b = NULL;
 	n = ft_lstsize(*stack_a);
 	if (n == 1)
 		return (0);
