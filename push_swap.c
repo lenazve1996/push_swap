@@ -6,7 +6,7 @@
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 13:06:43 by ayajirob@st       #+#    #+#             */
-/*   Updated: 2022/02/07 17:59:42 by ayajirob@st      ###   ########.fr       */
+/*   Updated: 2022/02/08 19:16:16 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,13 @@ void	ft_sb(t_lst **stack_b, int write_flag)
 	t_lst *tmp_elem;
 	t_lst *new_head;
 
-	if (stack_b!= NULL)
-	{
-		if (*stack_b != NULL && (*stack_b)->next != NULL)
-		tmp_elem = *stack_b;
-		new_head = tmp_elem->next;
-		tmp_elem->next = new_head->next;
-		new_head->next = tmp_elem;
-		*stack_b = new_head;
-		if (write_flag)
-			write(1, "sb\n", 3);
-	}
+	tmp_elem = *stack_b;
+	new_head = tmp_elem->next;
+	tmp_elem->next = new_head->next;
+	new_head->next = tmp_elem;
+	*stack_b = new_head;
+	if (write_flag)
+		write(1, "sb\n", 3);
 }
 
 void	ft_ss(t_lst **stack_b, t_lst **stack_a)
@@ -53,8 +49,7 @@ void	ft_ss(t_lst **stack_b, t_lst **stack_a)
 
 void	ft_pa(t_lst **stack_b, t_lst **stack_a)
 {
-	t_lst *tmp_elem;
-	t_lst *new_head;
+	t_lst	*tmp_elem;
 
 	if (stack_b != NULL)
 	{
@@ -68,7 +63,6 @@ void	ft_pa(t_lst **stack_b, t_lst **stack_a)
 void	ft_pb(t_lst **stack_b, t_lst **stack_a)
 {
 	t_lst *tmp_elem;
-	t_lst *new_head;
 
 	if (stack_a != NULL)
 	{
@@ -126,7 +120,7 @@ void	ft_rra(t_lst **stack_a, int write_flag)
 	tmp_elem->next = NULL;
 	ft_lstadd_front_ps(stack_a, last_elem);
 	if (write_flag)
-		write(1, "rra\n", 3);
+		write(1, "rra\n", 4);
 }
 
 void	ft_rrb(t_lst **stack_b, int write_flag)
@@ -141,14 +135,14 @@ void	ft_rrb(t_lst **stack_b, int write_flag)
 	tmp_elem->next = NULL;
 	ft_lstadd_front_ps(stack_b, last_elem);
 	if (write_flag)
-		write(1, "rrb\n", 3);
+		write(1, "rrb\n", 4);
 }
 
 void	ft_rrr(t_lst **stack_a, t_lst **stack_b)
 {
 	ft_rra(stack_a, 0);
 	ft_rrb(stack_b, 0);
-	write(1, "rrr\n", 3);
+	write(1, "rrr\n", 4);
 }
 
 int ft_process_two_numbs(t_lst **stack_a)
@@ -180,7 +174,6 @@ int ft_process_three_numbs(t_lst **stack_a)
 	{
 		ft_sa(stack_a, 1);
 	}
-	
 	else if (a < b && a > c && b > c)
 	{
 		ft_rra(stack_a, 1);
@@ -192,10 +185,15 @@ int ft_process_three_numbs(t_lst **stack_a)
 	else if (a > b & a > c && b > c)
 	{
 		ft_sa(stack_a, 1);
-		ft_ra(stack_a, 1);
+		ft_rra(stack_a, 1);
 	}
 	return (0);
 }
+
+//void	ft_process_big_numbs(t_lst **stack_a)
+//{
+	
+//}
 
 int	ft_choose_algorithm(t_lst **stack_a)
 {
@@ -216,6 +214,11 @@ int	ft_choose_algorithm(t_lst **stack_a)
 		ft_process_three_numbs(stack_a);
 		return(0);
 	}
+	//else if (n > 3)
+	//{
+	//	ft_process_big_numbs(stack_a);
+	//	return(0);
+	//}
 	return (0);
 }
 
@@ -273,9 +276,9 @@ int	ft_check_order(t_lst **stack_a)
 
 int	ft_parser(int ac, char **av, t_lst **stack_a)
 {
-	int				i;
-	int				c;
-	char			**tmp_arr;
+	int		i;
+	int		c;
+	char	**tmp_arr;
 	
 	i = 1;
 	while (i < ac)
@@ -293,8 +296,74 @@ int	ft_parser(int ac, char **av, t_lst **stack_a)
 		i++;
 	}
 	if (ft_find_int_doubles(stack_a) == 1)
-		return (1);	
+		return (1);
 	return (0);
+}
+
+void	ft_define_index(t_lst **stack_a)
+{
+	t_lst	*tmp;
+	t_lst	*next;
+	int		n;
+	int		len;
+	int		stop;
+	
+	stop = 0;
+	tmp = *stack_a;
+	n = 0;
+	len = ft_lstsize(*stack_a);
+	while (n < len)
+	{
+		stop = 0;
+		if (tmp->index == -1)
+			tmp->index = n;
+		else
+		{
+			while(tmp->next != NULL && tmp->index != -1)
+				tmp = tmp->next;
+			tmp->index = n;
+		}
+		if (tmp->next != NULL)
+			next = tmp->next;
+		while (next != NULL && stop != 1)
+		{
+			if (next->numb < tmp->numb)
+			{
+				if (next->index == -1)
+				{
+					next->index = n;
+					tmp->index = -1;
+				}
+			}
+			if (next->next != NULL)
+				next = next->next;
+			else
+				stop = 1;
+		}
+		n++;
+	}
+}
+
+void	ft_printf_index(t_lst **stack_a)
+{
+	while ((*stack_a)->next != NULL)
+	{
+		printf("n->%d ", (*stack_a)->numb);
+		printf("i->%d ", (*stack_a)->index);
+		*stack_a = (*stack_a)->next;
+	}
+	printf("n->%d ", (*stack_a)->numb);
+	printf("i->%d \n", (*stack_a)->index);
+}
+
+void	ft_print_result(t_lst **stack_a)
+{
+	while ((*stack_a)->next != NULL)
+	{
+		printf("%d ", (*stack_a)->numb);
+		*stack_a = (*stack_a)->next;
+	}
+	printf("%d\n", (*stack_a)->numb);
 }
 
 int		main(int argc, char **argv)
@@ -303,11 +372,15 @@ int		main(int argc, char **argv)
 
 	stack_a = NULL;
 	if (argc < 2)
-		return (ft_putstr_ret("Error\n", 2));
+		return (ft_putstr_ret("Errordd\n", 2));
 	if (ft_parser(argc, argv, &stack_a) == 1)
-		return (ft_putstr_ret("Error\n", 2));
+		return (ft_putstr_ret("Erroraa\n", 2));
 	if (ft_check_order(&stack_a) == 1)
 		return (0);
+	ft_define_index(&stack_a);
+	ft_printf_index(&stack_a);
 	ft_choose_algorithm(&stack_a);
+	ft_print_result(&stack_a);
 	return (0);
+	
 }

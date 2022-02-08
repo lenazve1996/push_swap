@@ -8,6 +8,7 @@
 typedef struct s_lst
 {
 	int				numb;
+	int				index;
 	struct s_lst	*next;
 }					t_lst;
 
