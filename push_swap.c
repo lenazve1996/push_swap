@@ -6,7 +6,7 @@
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 13:06:43 by ayajirob@st       #+#    #+#             */
-/*   Updated: 2022/02/08 19:16:16 by ayajirob@st      ###   ########.fr       */
+/*   Updated: 2022/02/08 19:38:14 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -323,16 +323,20 @@ void	ft_define_index(t_lst **stack_a)
 				tmp = tmp->next;
 			tmp->index = n;
 		}
-		if (tmp->next != NULL)
-			next = tmp->next;
+		next = tmp->next;
 		while (next != NULL && stop != 1)
 		{
+			printf("tmp->numb %d \n", tmp->numb); //dell
+			printf("tmp->index %d \n", tmp->index); //dell
+			printf("next->numb %d \n", next->numb); //dell
+			printf("next->index %d \n\n", next->index); //dell
 			if (next->numb < tmp->numb)
 			{
 				if (next->index == -1)
 				{
 					next->index = n;
 					tmp->index = -1;
+					stop = 1;
 				}
 			}
 			if (next->next != NULL)
@@ -349,11 +353,11 @@ void	ft_printf_index(t_lst **stack_a)
 	while ((*stack_a)->next != NULL)
 	{
 		printf("n->%d ", (*stack_a)->numb);
-		printf("i->%d ", (*stack_a)->index);
+		printf("i->%d \n", (*stack_a)->index);
 		*stack_a = (*stack_a)->next;
 	}
 	printf("n->%d ", (*stack_a)->numb);
-	printf("i->%d \n", (*stack_a)->index);
+	printf("i->%d \n\n", (*stack_a)->index);
 }
 
 void	ft_print_result(t_lst **stack_a)
