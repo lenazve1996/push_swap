@@ -6,11 +6,31 @@
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 13:06:43 by ayajirob@st       #+#    #+#             */
-/*   Updated: 2022/02/08 19:38:14 by ayajirob@st      ###   ########.fr       */
+/*   Updated: 2022/02/09 17:34:32 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	ft_printf_index(t_lst **stack_a)
+{
+	t_lst *tmp;
+
+	if ((*stack_a) == NULL)
+		printf("FALED, not stack\n");
+	else
+	{
+		tmp = *stack_a;
+		while (tmp->next != NULL)
+		{
+			printf("n-> %3d 	", tmp->numb);
+			printf("i-> %3d \n", tmp->index);
+			tmp = tmp->next;
+		}
+		printf("n-> %3d 	", tmp->numb);
+		printf("i-> %3d \n\n", tmp->index);
+	}
+}
 
 void	ft_sa(t_lst **stack_a, int write_flag)
 {
@@ -64,7 +84,7 @@ void	ft_pb(t_lst **stack_b, t_lst **stack_a)
 {
 	t_lst *tmp_elem;
 
-	if (stack_a != NULL)
+	if (stack_b != NULL)
 	{
 		tmp_elem = *stack_a;
 		*stack_a = tmp_elem->next;
@@ -87,14 +107,14 @@ void	ft_ra(t_lst **stack_a, int write_flag)
 		write(1, "ra\n", 3);
 }
 
-void	ft_rb(t_lst **stack_a, int write_flag)
+void	ft_rb(t_lst **stack_b, int write_flag)
 {
 	t_lst *tmp_elem;
 	t_lst *last_elem;
 
-	tmp_elem = *stack_a;
-	*stack_a = tmp_elem->next;
-	last_elem = ft_lstlast_ps(*stack_a);
+	tmp_elem = *stack_b;
+	*stack_b = tmp_elem->next;
+	last_elem = ft_lstlast_ps(*stack_b);
 	last_elem->next = tmp_elem;
 	tmp_elem->next = NULL;
 	if (write_flag)
@@ -190,18 +210,85 @@ int ft_process_three_numbs(t_lst **stack_a)
 	return (0);
 }
 
-//void	ft_process_big_numbs(t_lst **stack_a)
-//{
+t_lst	*ft_find_numb(t_lst **stack_a, int index)
+{
+	t_lst	*tmp;
+
+	tmp = *stack_a;
+	while (tmp != NULL && tmp->index != index)
+		tmp = tmp->next;
+	return (tmp);
 	
-//}
+}
+
+void	ft_fill_stack_b(t_lst **stack_a, t_lst **stack_b)
+{
+	t_lst	*median;
+	t_lst	*max;
+	t_lst	*min;
+	int		n;
+	int		i;
+
+	n = ft_lstsize(*stack_a);
+	i = 0;
+	min = ft_find_numb(stack_a, 0);
+	max = ft_find_numb(stack_a, n - 1);
+	median =  ft_find_numb(stack_a, n / 2);
+	//printf("%d\n", min->index);
+	//printf("%d\n", max->index);
+	//printf("%d\n", median->index);
+	while ((*stack_a) != NULL && i < n)
+	{
+		if ((*stack_a) != min && (*stack_a) != max && (*stack_a) != median)
+		{
+			//printf("---> %d\n", (*stack_a)->index); //dell
+			if ((*stack_a)->index < median->index)
+				ft_pb(stack_b, stack_a);
+			else if ((*stack_a)->index > median->index)
+			{
+				//printf("---> HEY MAMBO\n"); //dell
+				ft_pb(stack_b, stack_a);
+				ft_rb(stack_b, 1);
+			}
+				
+		}
+		else 
+			ft_ra(stack_a, 1);
+		//printf("\nSTACK_A:\n");
+		//ft_printf_index(stack_a);
+		//printf("STACK_B:\n");
+		//ft_printf_index(stack_b);
+		i++;
+	}
+}
+
+void	ft_process_big_numbs(t_lst **stack_a)
+{
+	t_lst	*stack_b;
+	
+	stack_b = NULL;
+	ft_fill_stack_b(stack_a, &stack_b);
+	printf("\nSTACK_A:\n");
+	ft_printf_index(stack_a);
+	printf("STACK_B:\n");
+	ft_printf_index(&stack_b);
+	//while ((stack_b)->next != NULL)
+	//{
+	//	printf("n->%d ", (stack_b)->numb);
+	//	printf("i->%d \n", (stack_b)->index);
+	//	*stack_a = (stack_b)->next;	
+	//}
+	//printf("n->%d ", (stack_b)->numb);
+	//printf("i->%d \n\n", (stack_b)->index);
+	
+}
 
 int	ft_choose_algorithm(t_lst **stack_a)
 {
 	int		n;
-	t_lst	*stack_b;
 	
-	stack_b = NULL;
 	n = ft_lstsize(*stack_a);
+	printf("%d\n", n);
 	if (n == 1)
 		return (0);
 	else if (n == 2)
@@ -214,11 +301,11 @@ int	ft_choose_algorithm(t_lst **stack_a)
 		ft_process_three_numbs(stack_a);
 		return(0);
 	}
-	//else if (n > 3)
-	//{
-	//	ft_process_big_numbs(stack_a);
-	//	return(0);
-	//}
+	else if (n > 3)
+	{
+		ft_process_big_numbs(stack_a);
+		return(0);
+	}
 	return (0);
 }
 
@@ -309,11 +396,12 @@ void	ft_define_index(t_lst **stack_a)
 	int		stop;
 	
 	stop = 0;
-	tmp = *stack_a;
+	//tmp = *stack_a;
 	n = 0;
 	len = ft_lstsize(*stack_a);
 	while (n < len)
 	{
+		tmp = *stack_a;
 		stop = 0;
 		if (tmp->index == -1)
 			tmp->index = n;
@@ -326,17 +414,17 @@ void	ft_define_index(t_lst **stack_a)
 		next = tmp->next;
 		while (next != NULL && stop != 1)
 		{
-			printf("tmp->numb %d \n", tmp->numb); //dell
-			printf("tmp->index %d \n", tmp->index); //dell
-			printf("next->numb %d \n", next->numb); //dell
-			printf("next->index %d \n\n", next->index); //dell
+			//printf("tmp->numb %d \n", tmp->numb); //dell
+			//printf("tmp->index %d \n", tmp->index); //dell
+			//printf("next->numb %d \n", next->numb); //dell
+			//printf("next->index %d \n\n", next->index); //dell
 			if (next->numb < tmp->numb)
 			{
 				if (next->index == -1)
 				{
 					next->index = n;
 					tmp->index = -1;
-					stop = 1;
+					tmp = next;
 				}
 			}
 			if (next->next != NULL)
@@ -346,18 +434,6 @@ void	ft_define_index(t_lst **stack_a)
 		}
 		n++;
 	}
-}
-
-void	ft_printf_index(t_lst **stack_a)
-{
-	while ((*stack_a)->next != NULL)
-	{
-		printf("n->%d ", (*stack_a)->numb);
-		printf("i->%d \n", (*stack_a)->index);
-		*stack_a = (*stack_a)->next;
-	}
-	printf("n->%d ", (*stack_a)->numb);
-	printf("i->%d \n\n", (*stack_a)->index);
 }
 
 void	ft_print_result(t_lst **stack_a)
@@ -376,9 +452,9 @@ int		main(int argc, char **argv)
 
 	stack_a = NULL;
 	if (argc < 2)
-		return (ft_putstr_ret("Errordd\n", 2));
+		return (ft_putstr_ret("Errordd\n", 2)); //dell
 	if (ft_parser(argc, argv, &stack_a) == 1)
-		return (ft_putstr_ret("Erroraa\n", 2));
+		return (ft_putstr_ret("Erroraa\n", 2)); //dell
 	if (ft_check_order(&stack_a) == 1)
 		return (0);
 	ft_define_index(&stack_a);
