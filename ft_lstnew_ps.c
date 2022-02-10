@@ -6,7 +6,7 @@
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 18:44:01 by ayajirob@st       #+#    #+#             */
-/*   Updated: 2022/02/08 18:46:40 by ayajirob@st      ###   ########.fr       */
+/*   Updated: 2022/02/10 18:35:49 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ t_lst	*ft_lstnew_ps(int numb)
 	if (!new_element)
 		return (NULL);
 	new_element->numb = numb;
+	new_element->up = -1;
+	new_element->move = -1;
+	new_element->sum = -1;
 	new_element->index = -1;
 	new_element->next = NULL;
 	return (new_element);

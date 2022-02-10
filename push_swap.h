@@ -9,6 +9,9 @@ typedef struct s_lst
 {
 	int				numb;
 	int				index;
+	int				up;
+	int				move;
+	int				sum;
 	struct s_lst	*next;
 }					t_lst;
 
