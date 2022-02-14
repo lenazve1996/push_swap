@@ -6,7 +6,7 @@
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 13:06:43 by ayajirob@st       #+#    #+#             */
-/*   Updated: 2022/02/14 17:36:52 by ayajirob@st      ###   ########.fr       */
+/*   Updated: 2022/02/14 19:42:57 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,14 @@ void	ft_sb(t_lst **stack_b, int write_flag)
 		write(1, "sb\n", 3);
 }
 
-void	ft_ss(t_lst **stack_b, t_lst **stack_a)
-{	
-	ft_sa(stack_a, 0);
-	ft_sb(stack_b, 0);
-	write(1, "ss\n", 3);
-}
+//void	ft_ss(t_lst **stack_b, t_lst **stack_a)
+//{	
+//	ft_sa(stack_a, 0);
+//	ft_sb(stack_b, 0);
+//	write(1, "ss\n", 3);
+//}
 
-void	ft_pa(t_lst **stack_b, t_lst **stack_a)
+void	ft_pa(t_lst **stack_b, t_lst **stack_a, int write_flag)
 {
 	t_lst	*tmp_elem;
 
@@ -94,10 +94,11 @@ void	ft_pa(t_lst **stack_b, t_lst **stack_a)
 		*stack_b = tmp_elem->next;
 		ft_lstadd_front_ps(stack_a, tmp_elem);
 	}
-	write(1, "pa\n", 3);
+	if (write_flag)
+		write(1, "pa\n", 3);
 }
 
-void	ft_pb(t_lst **stack_b, t_lst **stack_a)
+void	ft_pb(t_lst **stack_b, t_lst **stack_a, int write_flag)
 {
 	t_lst *tmp_elem;
 
@@ -107,7 +108,8 @@ void	ft_pb(t_lst **stack_b, t_lst **stack_a)
 		*stack_a = tmp_elem->next;
 		ft_lstadd_front_ps(stack_b, tmp_elem);
 	}
-	write(1, "pb\n", 3);
+	if (write_flag)
+		write(1, "pb\n", 3);
 }
 
 void	ft_ra(t_lst **stack_a, int write_flag)
@@ -142,11 +144,12 @@ void	ft_rb(t_lst **stack_b, int write_flag)
 		write(1, "rb\n", 3);
 }
 
-void	ft_rr(t_lst **stack_a, t_lst **stack_b)
+void	ft_rr(t_lst **stack_a, t_lst **stack_b, int write_flag)
 {
 	ft_ra(stack_a, 0);
 	ft_rb(stack_b, 0);
-	write(1, "rr\n", 3);
+	if (write_flag)
+		write(1, "rr\n", 3);
 }
 
 void	ft_rra(t_lst **stack_a, int write_flag)
@@ -179,11 +182,12 @@ void	ft_rrb(t_lst **stack_b, int write_flag)
 		write(1, "rrb\n", 4);
 }
 
-void	ft_rrr(t_lst **stack_a, t_lst **stack_b)
+void	ft_rrr(t_lst **stack_a, t_lst **stack_b, int write_flag)
 {
 	ft_rra(stack_a, 0);
 	ft_rrb(stack_b, 0);
-	write(1, "rrr\n", 4);
+	if (write_flag)
+		write(1, "rrr\n", 4);
 }
 
 int ft_process_two_numbs(t_lst **stack_a)
@@ -285,14 +289,14 @@ int	ft_process_five_numbs(t_lst **stack_a)
 	min = ft_find_numb(stack_a, 0);
 	while ((*stack_a)->index != 0)
 		ft_ra(stack_a, 1);
-	ft_pb(&stack_b, stack_a);
+	ft_pb(&stack_b, stack_a, 1);
 	min = ft_find_numb(stack_a, 1);
 	while ((*stack_a)->index != 1)
 		ft_ra(stack_a, 1);
-	ft_pb(&stack_b, stack_a);
+	ft_pb(&stack_b, stack_a, 1);
 	ft_process_three_numbs(stack_a);
-	ft_pa(&stack_b, stack_a);
-	ft_pa(&stack_b, stack_a);
+	ft_pa(&stack_b, stack_a, 1);
+	ft_pa(&stack_b, stack_a, 1);
 	return (0);
 }
 
@@ -314,10 +318,10 @@ void	ft_fill_stack_b(t_lst **stack_a, t_lst **stack_b)
 		if ((*stack_a) != min && (*stack_a) != max && (*stack_a) != median)
 		{
 			if ((*stack_a)->index < median->index)
-				ft_pb(stack_b, stack_a);
+				ft_pb(stack_b, stack_a, 1);
 			else if ((*stack_a)->index > median->index)
 			{
-				ft_pb(stack_b, stack_a);
+				ft_pb(stack_b, stack_a, 1);
 				if (stack_b != NULL)
 					ft_rb(stack_b, 1);
 			}
@@ -423,13 +427,13 @@ void	ft_sort(t_lst **stack_a, t_lst **stack_b)
 	{
 		if (min_lst->up > 0 && min_lst->move > 0)
 		{
-			ft_rr(stack_a, stack_b);
+			ft_rr(stack_a, stack_b, 1);
 			min_lst->up--;
 			min_lst->move--;
 		}
 		else if (min_lst->up < 0 && min_lst->move < 0)
 		{
-			ft_rrr(stack_a, stack_b);
+			ft_rrr(stack_a, stack_b, 1);
 			min_lst->up++;
 			min_lst->move++;
 		}
@@ -467,7 +471,7 @@ void	ft_sort(t_lst **stack_a, t_lst **stack_b)
 	//		min_lst->move++;
 	//	}
 	//}
-	ft_pa(stack_b, stack_a);
+	ft_pa(stack_b, stack_a, 1);
 }
 
 int	ft_process_big_numbs(t_lst **stack_a)
@@ -511,9 +515,9 @@ int	ft_process_four_numbs(t_lst **stack_a)
 	min = ft_find_numb(stack_a, 0);
 	while ((*stack_a)->index != 0)
 		ft_ra(stack_a, 1);
-	ft_pb(&stack_b, stack_a);
+	ft_pb(&stack_b, stack_a, 1);
 	ft_process_three_numbs(stack_a);
-	ft_pa(&stack_b, stack_a);
+	ft_pa(&stack_b, stack_a, 1);
 	return (0);
 }
 
@@ -537,83 +541,68 @@ int	ft_choose_algorithm(t_lst **stack_a)
 	return (0);
 }
 
-int	ft_check_characters(char *str)
-{
-	int	i;
+//int	ft_check_characters(char *str)
+//{
+//	int	i;
 	
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (ft_isdigit_orsign(str[i]) == 0)
-			return (1);
-		if (i == 0 && str[i + 1] == '\0' && (str[i] == '+' || str[i] == '-'))
-			return (1);
-		if (i == 0 && (str[i + 1] == '+' || str[i + 1] == '-') && \
-		(str[i] == '+' || str[i] == '-'))
-			return (1);
-		i++;
-	}
-	return (0);
-}
+//	i = 0;
+//	while (str[i] != '\0')
+//	{
+//		if (ft_isdigit_orsign(str[i]) == 0)
+//			return (1);
+//		if (i == 0 && str[i + 1] == '\0' && (str[i] == '+' || str[i] == '-'))
+//			return (1);
+//		if (i == 0 && (str[i + 1] == '+' || str[i + 1] == '-') && \
+//		(str[i] == '+' || str[i] == '-'))
+//			return (1);
+//		i++;
+//	}
+//	return (0);
+//}
 
-int	ft_fill_stack_a(char *str, t_lst **stack_a)
-{
-	long long int	numb;
+//int	ft_fill_stack_a(char *str, t_lst **stack_a)
+//{
+//	long long int	numb;
 	
-	if (ft_check_characters(str) == 1)
-		return (1);
-	numb = ft_atoi(str);
-	if (numb < -2147483648 || numb > 2147483647)
-		return (1);
-	if (stack_a == NULL)
-		*stack_a = ft_lstnew_ps(numb);
-	else
-	{
-		ft_lstadd_back_ps(stack_a, ft_lstnew_ps(numb));
-	}
-	return (0);
-}
+//	if (ft_check_characters(str) == 1)
+//		return (1);
+//	numb = ft_atoi(str);
+//	if (numb < -2147483648 || numb > 2147483647)
+//		return (1);
+//	if (stack_a == NULL)
+//		*stack_a = ft_lstnew_ps(numb);
+//	else
+//	{
+//		ft_lstadd_back_ps(stack_a, ft_lstnew_ps(numb));
+//	}
+//	return (0);
+//}
 
-int	ft_check_order(t_lst **stack_a)
-{
-	t_lst	*tmp_lst;
+//int	ft_parser(int ac, char **av, t_lst **stack_a)
+//{
+//	int		i;
+//	int		c;
+//	char	**tmp_arr;
 	
-	tmp_lst = *stack_a;
-	while (tmp_lst->next != NULL)
-	{
-		if (tmp_lst->numb > tmp_lst->next->numb)
-			return (0);
-		else
-			tmp_lst = tmp_lst->next;
-	}
-	return (1);
-}
-
-int	ft_parser(int ac, char **av, t_lst **stack_a)
-{
-	int		i;
-	int		c;
-	char	**tmp_arr;
-	
-	i = 1;
-	while (i < ac)
-	{
-		c = 0;
-		tmp_arr = ft_split(av[i], ' ');
-		if (tmp_arr == NULL)
-			return (1);
-		while (tmp_arr[c] != NULL)
-		{
-			if (ft_fill_stack_a(tmp_arr[c], stack_a) == 1)
-				return (1);
-			c++;
-		}
-		i++;
-	}
-	if (ft_find_int_doubles(stack_a) == 1)
-		return (1);
-	return (0);
-}
+//	i = 1;
+//	while (i < ac)
+//	{
+//		c = 0;
+//		tmp_arr = ft_split(av[i], ' ');
+//		if (tmp_arr == NULL)
+//			return (1);
+//		while (tmp_arr[c] != NULL)
+//		{
+//			if (ft_fill_stack_a(tmp_arr[c], stack_a) == 1)
+//				return (1);
+//			c++;
+//		}
+//		i++;
+//	}
+//	if (ft_find_int_doubles(stack_a) == 1)
+//		return (1);
+//	return (0);
+//}
 
 void	ft_print_result(t_lst **stack_a)
 {

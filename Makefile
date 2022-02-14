@@ -1,11 +1,15 @@
 NAME_PS = push_swap
-#CHECKER = checker
+CHECKER = checker
 CC = cc
 FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 SRC_PS = push_swap.c ft_lstnew_ps.c ft_lstadd_back_ps.c ft_find_int_doubles.c \
-ft_lstlast_ps.c ft_lstadd_front_ps.c ft_lstsize.c
+ft_lstlast_ps.c ft_lstadd_front_ps.c ft_lstsize.c parser.c
+SRC_CHECKER = checker_bonus.c parser.c ft_find_int_doubles.c ft_lstadd_back_ps.c\
+ft_lstnew_ps.c ft_lstlast_ps.c ft_lstadd_front_ps.c get_next_line_bonus.c \
+get_next_line_utils_bonus.c push_swap.c ft_lstsize.c
 OBJ = $(SRC_PS:.c=.o)
-D_FILES = $(SRC_PS:.c=.d)
+OBJ_CHECKER = $(SRC_CHECKER:.c=.o)
+D_FILES = $(SRC_PS:.c=.d) $(SRC_CHECKER:.c=.d)
 
 all : libft.a $(NAME_PS)
 
@@ -16,19 +20,22 @@ libft.a :
 		cd ./libft && make
 		cp ./libft/libft.a ./
 
+bonus : libft.a $(CHECKER)
+
+$(CHECKER) : $(OBJ_CHECKER)
+		$(CC) $(FLAGS) libft.a $(OBJ_CHECKER) -o $@
+
 %.o : %.c
 		$(CC) $(FLAGS) -c $? -o $@ -MD
 
-#bonus : libft.a $(CHECKER)
-
 clean :
-		rm -f $(OBJ)
+		rm -f $(OBJ) $(OBJ_CHECKER)
 		rm -f $(D_FILES)
 		rm -f libft.a
 		cd ./libft && make clean
 
 fclean : clean
-		rm -f $(NAME_PS)
+		rm -f $(NAME_PS) $(CHECKER)
 		cd ./libft && rm -f libft.a
 
 re : fclean all
