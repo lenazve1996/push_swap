@@ -1,4 +1,5 @@
 NAME_PS = push_swap
+#CHECKER = checker
 CC = cc
 FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 SRC_PS = push_swap.c ft_lstnew_ps.c ft_lstadd_back_ps.c ft_find_int_doubles.c \
@@ -17,6 +18,8 @@ libft.a :
 
 %.o : %.c
 		$(CC) $(FLAGS) -c $? -o $@ -MD
+
+#bonus : libft.a $(CHECKER)
 
 clean :
 		rm -f $(OBJ)
