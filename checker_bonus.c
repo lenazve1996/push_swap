@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   checker_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
+/*   By: ayajirob <ayajirob@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 18:24:28 by ayajirob@st       #+#    #+#             */
-/*   Updated: 2022/02/14 19:38:32 by ayajirob@st      ###   ########.fr       */
+/*   Updated: 2022/02/15 10:37:38 by ayajirob         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
 
-//void	ft_print_result(t_lst **stack_a)
-//{
-//	while ((*stack_a)->next != NULL)
-//	{
-//		printf("%d ", (*stack_a)->numb);
-//		*stack_a = (*stack_a)->next;
-//	}
-//	printf("%d\n", (*stack_a)->numb);
-//}
+void	ft_print_result(t_lst **stack_a)
+{
+	while ((*stack_a)->next != NULL)
+	{
+		printf("%d ", (*stack_a)->numb);
+		*stack_a = (*stack_a)->next;
+	}
+	printf("%d\n", (*stack_a)->numb);
+}
 
 int main(int argc, char **argv)
 {
@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 		return (ft_putstr_ret("Error\n", 2));
 	if (ft_check_order(&stack_a) == 1)
 		return (0);
-	ft_print_result(&stack_a);
+	// ft_print_result(&stack_a);
 	line = malloc(1);
 	instr_numb = 0;
 	while (line != NULL)
