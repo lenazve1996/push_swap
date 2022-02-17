@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/05 15:43:20 by ayajirob          #+#    #+#             */
-/*   Updated: 2022/02/17 14:43:51 by ayajirob@st      ###   ########.fr       */
+/*   Created: 2022/02/17 12:42:55 by ayajirob@st       #+#    #+#             */
+/*   Updated: 2022/02/17 14:52:00 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-int	ft_isprint(int c)
+void	ft_lstclear(t_lst **lst)
 {
-	if (c >= 040 && c <= 0176)
-		return (1);
-	return (0);
+	t_lst	*tmp;
+
+	while (*lst != NULL)
+	{
+		tmp = *lst;
+		*lst = tmp->next;
+		free(tmp);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 18:34:25 by ayajirob          #+#    #+#             */
-/*   Updated: 2022/02/14 19:27:54 by ayajirob@st      ###   ########.fr       */
+/*   Updated: 2022/02/17 14:50:41 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <sys/uio.h>
 # include <stdlib.h>
 
-# ifndef	BUFFER_SIZE
-#  define	BUFFER_SIZE 42
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
 # endif
 
 char	*get_next_line(int fd);

@@ -6,7 +6,7 @@
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 18:34:14 by ayajirob          #+#    #+#             */
-/*   Updated: 2022/02/14 19:35:30 by ayajirob@st      ###   ########.fr       */
+/*   Updated: 2022/02/17 14:51:48 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*ft_reading(char *buffer, int fd)
 	if (buffer == NULL)
 		return (NULL);
 	read_result = read(fd, buffer, BUFFER_SIZE);
-	if (read_result <= 0 )
+	if (read_result <= 0)
 	{
 		free(buffer);
 		buffer = NULL;
@@ -98,7 +98,7 @@ char	*get_next_line(int fd)
 	char		*line;
 	int			index;
 
-	if (fd < 0 || fd >= 10240) 
+	if (fd < 0 || fd >= 10240)
 		return (NULL);
 	line = NULL;
 	if (buffer[fd] == NULL)

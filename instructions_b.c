@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   instructions_b.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/17 14:31:24 by ayajirob@st       #+#    #+#             */
+/*   Updated: 2022/02/17 17:08:27 by ayajirob@st      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	ft_sb(t_lst **stack_b, int write_flag)
 {
-	t_lst *tmp_elem;
-	t_lst *new_head;
+	t_lst	*tmp_elem;
+	t_lst	*new_head;
 
 	tmp_elem = *stack_b;
 	new_head = tmp_elem->next;
@@ -14,18 +26,11 @@ void	ft_sb(t_lst **stack_b, int write_flag)
 		write(1, "sb\n", 3);
 }
 
-//void	ft_ss(t_lst **stack_b, t_lst **stack_a)
-//{	
-//	ft_sa(stack_a, 0);
-//	ft_sb(stack_b, 0);
-//	write(1, "ss\n", 3);
-//}
-
 void	ft_pb(t_lst **stack_b, t_lst **stack_a, int write_flag)
 {
-	t_lst *tmp_elem;
+	t_lst	*tmp_elem;
 
-	if (stack_b != NULL)
+	if (stack_a != NULL && *stack_a != NULL)
 	{
 		tmp_elem = *stack_a;
 		*stack_a = tmp_elem->next;
@@ -37,11 +42,10 @@ void	ft_pb(t_lst **stack_b, t_lst **stack_a, int write_flag)
 
 void	ft_rb(t_lst **stack_b, int write_flag)
 {
-	t_lst *tmp_elem;
-	t_lst *last_elem;
+	t_lst	*tmp_elem;
+	t_lst	*last_elem;
 
-	if ((*stack_b) != NULL && (*stack_b)
-	->next != NULL)
+	if ((*stack_b) != NULL && (*stack_b)->next != NULL)
 	{
 		tmp_elem = *stack_b;
 		*stack_b = tmp_elem->next;
@@ -63,8 +67,8 @@ void	ft_rr(t_lst **stack_a, t_lst **stack_b, int write_flag)
 
 void	ft_rrb(t_lst **stack_b, int write_flag)
 {
-	t_lst *tmp_elem;
-	t_lst *last_elem;
+	t_lst	*tmp_elem;
+	t_lst	*last_elem;
 
 	last_elem = ft_lstlast_ps(*stack_b);
 	tmp_elem = *stack_b;

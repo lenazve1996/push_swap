@@ -6,7 +6,7 @@
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 12:21:54 by ayajirob@st       #+#    #+#             */
-/*   Updated: 2022/02/08 18:47:00 by ayajirob@st      ###   ########.fr       */
+/*   Updated: 2022/02/17 14:52:19 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_find_int_doubles(t_lst **stack_a)
 {
 	t_lst	*tmp_lst;
 	t_lst	*next_lst;
-	
+
 	tmp_lst = *stack_a;
 	while (tmp_lst != NULL)
 	{

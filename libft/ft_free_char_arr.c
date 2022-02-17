@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_free_char_arr.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/05 15:43:20 by ayajirob          #+#    #+#             */
-/*   Updated: 2022/02/17 14:43:51 by ayajirob@st      ###   ########.fr       */
+/*   Created: 2022/02/17 12:32:42 by ayajirob@st       #+#    #+#             */
+/*   Updated: 2022/02/17 14:44:44 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isprint(int c)
+void	ft_free_char_arr(char **arr, int arr_free_flag)
 {
-	if (c >= 040 && c <= 0176)
-		return (1);
-	return (0);
+	int		i;
+
+	i = 0;
+	while (arr[i] != NULL)
+	{
+		free(arr[i++]);
+	}
+	if (arr_free_flag)
+		free(arr);
 }

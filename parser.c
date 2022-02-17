@@ -6,7 +6,7 @@
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 18:33:03 by ayajirob@st       #+#    #+#             */
-/*   Updated: 2022/02/14 18:54:56 by ayajirob@st      ###   ########.fr       */
+/*   Updated: 2022/02/17 19:07:07 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	ft_check_order(t_lst **stack_a)
 {
 	t_lst	*tmp_lst;
-	
+
 	tmp_lst = *stack_a;
-	while (tmp_lst->next != NULL)
+	while (tmp_lst != NULL && tmp_lst->next != NULL)
 	{
 		if (tmp_lst->numb > tmp_lst->next->numb)
 			return (0);
@@ -30,7 +30,7 @@ int	ft_check_order(t_lst **stack_a)
 static int	ft_check_characters(char *str)
 {
 	int	i;
-	
+
 	i = 0;
 	while (str[i] != '\0')
 	{
@@ -49,17 +49,26 @@ static int	ft_check_characters(char *str)
 static int	ft_fill_stack_a(char *str, t_lst **stack_a)
 {
 	long long int	numb;
-	
+	t_lst	*new;
+
 	if (ft_check_characters(str) == 1)
 		return (1);
 	numb = ft_atoi(str);
 	if (numb < -2147483648 || numb > 2147483647)
 		return (1);
 	if (stack_a == NULL)
-		*stack_a = ft_lstnew_ps(numb);
+	{
+		new = ft_lstnew_ps(numb);
+		if (new == NULL)
+			return (1);
+		*stack_a = new;
+	}
 	else
 	{
-		ft_lstadd_back_ps(stack_a, ft_lstnew_ps(numb));
+		new = ft_lstnew_ps(numb);
+		if (new == NULL)
+			return (1);
+		ft_lstadd_back_ps(stack_a, new);
 	}
 	return (0);
 }
@@ -69,7 +78,7 @@ int	ft_parser(int ac, char **av, t_lst **stack_a)
 	int		i;
 	int		c;
 	char	**tmp_arr;
-	
+
 	i = 1;
 	while (i < ac)
 	{
@@ -80,9 +89,13 @@ int	ft_parser(int ac, char **av, t_lst **stack_a)
 		while (tmp_arr[c] != NULL)
 		{
 			if (ft_fill_stack_a(tmp_arr[c], stack_a) == 1)
+			{
+				ft_free_char_arr(tmp_arr, 1);
 				return (1);
+			}
 			c++;
 		}
+		ft_free_char_arr(tmp_arr, 1);
 		i++;
 	}
 	if (ft_find_int_doubles(stack_a) == 1)

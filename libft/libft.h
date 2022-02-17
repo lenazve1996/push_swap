@@ -6,7 +6,7 @@
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 14:36:57 by ayajirob          #+#    #+#             */
-/*   Updated: 2022/01/25 14:47:08 by ayajirob@st      ###   ########.fr       */
+/*   Updated: 2022/02/17 14:41:54 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 
 void			ft_bzero(void *s, size_t n);
 void			*ft_calloc(size_t count, size_t size);
-int				ft_isalnum(int	c);
-int				ft_isalpha(int	c);
-int				ft_isascii(int	c);
-int				ft_isdigit(int	ch);
-int				ft_isprint(int	c);
+int				ft_isalnum(int c);
+int				ft_isalpha(int c);
+int				ft_isascii(int c);
+int				ft_isdigit(int ch);
+int				ft_isprint(int c);
 void			*ft_memchr(const void *s, int c, size_t n);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 void			*ft_memcpy(void *dst, const void *src, size_t n);
@@ -34,7 +34,8 @@ size_t			ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t			ft_strlen(const char *s);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
-char			*ft_strnstr(const char *haystack, const char *needle, size_t len);
+char			*ft_strnstr(const char *haystack, const char *needle, \
+size_t len);
 char			*ft_strrchr(const char *s, int c);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 int				ft_tolower(int c);
@@ -52,5 +53,6 @@ void			ft_putendl_fd(char *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
 int				ft_putstr_ret(char *s, int fd);
 int				ft_isdigit_orsign(int ch);
+void			ft_free_char_arr(char **arr, int arr_free_flag);
 
 #endif

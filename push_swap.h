@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/17 14:44:54 by ayajirob@st       #+#    #+#             */
+/*   Updated: 2022/02/17 14:44:55 by ayajirob@st      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -34,5 +46,6 @@ void	ft_rra(t_lst **stack_a, int write_flag);
 void	ft_rrb(t_lst **stack_b, int write_flag);
 void	ft_rrr(t_lst **stack_a, t_lst **stack_b, int write_flag);
 void	ft_print_result(t_lst **stack_a);
+void	ft_lstclear(t_lst **lst);
 
 #endif

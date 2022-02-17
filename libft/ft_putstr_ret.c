@@ -6,7 +6,7 @@
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 13:19:11 by ayajirob@st       #+#    #+#             */
-/*   Updated: 2022/01/22 13:22:25 by ayajirob@st      ###   ########.fr       */
+/*   Updated: 2022/02/17 14:42:18 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,3 @@ int	ft_putstr_ret(char *s, int fd)
 	write(fd, s, ft_strlen(s));
 	return (1);
 }
-

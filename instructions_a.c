@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   instructions_a.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/17 14:31:40 by ayajirob@st       #+#    #+#             */
+/*   Updated: 2022/02/17 17:05:43 by ayajirob@st      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	ft_sa(t_lst **stack_a, int write_flag)
 {
-	t_lst *tmp_elem;
-	t_lst *new_head;
+	t_lst	*tmp_elem;
+	t_lst	*new_head;
 
 	tmp_elem = *stack_a;
 	new_head = tmp_elem->next;
@@ -18,7 +30,7 @@ void	ft_pa(t_lst **stack_b, t_lst **stack_a, int write_flag)
 {
 	t_lst	*tmp_elem;
 
-	if (stack_b != NULL)
+	if (stack_b != NULL && *stack_b != NULL)
 	{
 		tmp_elem = *stack_b;
 		*stack_b = tmp_elem->next;
@@ -30,8 +42,8 @@ void	ft_pa(t_lst **stack_b, t_lst **stack_a, int write_flag)
 
 void	ft_ra(t_lst **stack_a, int write_flag)
 {
-	t_lst *tmp_elem;
-	t_lst *last_elem;
+	t_lst	*tmp_elem;
+	t_lst	*last_elem;
 
 	tmp_elem = *stack_a;
 	*stack_a = tmp_elem->next;
@@ -44,8 +56,8 @@ void	ft_ra(t_lst **stack_a, int write_flag)
 
 void	ft_rra(t_lst **stack_a, int write_flag)
 {
-	t_lst *tmp_elem;
-	t_lst *last_elem;
+	t_lst	*tmp_elem;
+	t_lst	*last_elem;
 
 	last_elem = ft_lstlast_ps(*stack_a);
 	tmp_elem = *stack_a;
