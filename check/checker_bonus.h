@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast_ps.c                                    :+:      :+:    :+:   */
+/*   checker_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/23 19:04:49 by ayajirob@st       #+#    #+#             */
-/*   Updated: 2022/02/17 14:51:20 by ayajirob@st      ###   ########.fr       */
+/*   Created: 2022/02/17 14:52:32 by ayajirob@st       #+#    #+#             */
+/*   Updated: 2022/02/18 19:11:05 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef CHECKER_BONUS_H
+# define CHECKER_BONUS_H
 
-t_lst	*ft_lstlast_ps(t_lst *lst)
-{
-	if (lst == NULL)
-		return (NULL);
-	while (lst->next != NULL)
-		lst = lst->next;
-	return (lst);
-}
+# include <limits.h>
+# include "../push_swap.h"
+
+int	ft_execute_instr(char **instr, t_lst **st_a, t_lst **st_b, int numb);
+
+#endif

@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front_ps.c                               :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/23 19:07:06 by ayajirob@st       #+#    #+#             */
-/*   Updated: 2022/01/23 19:23:34 by ayajirob@st      ###   ########.fr       */
+/*   Created: 2022/01/25 15:17:53 by ayajirob@st       #+#    #+#             */
+/*   Updated: 2022/02/18 16:10:58 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
-void	ft_lstadd_front_ps(t_lst **lst, t_lst *new)
+int	ft_lstsize(t_lst *lst)
 {
-	new->next = *lst;
-	*lst = new;
+	int	list_length;
+
+	if (lst == NULL)
+		return (0);
+	list_length = 1;
+	while (lst->next != NULL)
+	{
+		lst = lst->next;
+		list_length++;
+	}
+	return (list_length);
 }

@@ -2,13 +2,16 @@ NAME_PS = push_swap
 CHECKER = checker
 CC = cc
 FLAGS = -Wall -Wextra -Werror
-SRC_PS = push_swap.c ft_lstnew_ps.c ft_lstadd_back_ps.c ft_find_int_doubles.c \
-ft_lstlast_ps.c ft_lstadd_front_ps.c ft_lstsize.c parser.c instructions_a.c \
-instructions_b.c ft_lstclear.c
-SRC_CHECKER = checker_bonus.c parser.c ft_find_int_doubles.c ft_lstadd_back_ps.c\
-ft_lstnew_ps.c ft_lstlast_ps.c ft_lstadd_front_ps.c get_next_line_bonus.c \
-get_next_line_utils_bonus.c ft_lstsize.c instructions_a.c\
-instructions_b.c ft_lstclear.c
+SRC_PS = ps/push_swap.c lst_funcs/ft_lstnew_ps.c lst_funcs/ft_lstadd_back_ps.c \
+ps/ft_find_int_doubles.c lst_funcs/ft_lstlast_ps.c lst_funcs/ft_lstadd_front_ps.c \
+lst_funcs/ft_lstsize.c ps/parser.c ps/instructions_a.c ps/instructions_b.c \
+lst_funcs/ft_lstclear.c ps/small_numbers.c ps/indexes.c ps/sort.c ps/fill_stack_b.c \
+ps/inctructions_both.c
+SRC_CHECKER = check/checker_bonus.c check/execute_instr.c ps/parser.c \
+ps/ft_find_int_doubles.c lst_funcs/ft_lstadd_back_ps.c\
+lst_funcs/ft_lstnew_ps.c lst_funcs/ft_lstlast_ps.c lst_funcs/ft_lstadd_front_ps.c \
+lst_funcs/ft_lstsize.c ps/instructions_a.c ps/instructions_b.c lst_funcs/ft_lstclear.c \
+ps/inctructions_both.c
 OBJ = $(SRC_PS:.c=.o)
 OBJ_CHECKER = $(SRC_CHECKER:.c=.o)
 D_FILES = $(SRC_PS:.c=.d) $(SRC_CHECKER:.c=.d)

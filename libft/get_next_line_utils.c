@@ -1,67 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 18:34:32 by ayajirob          #+#    #+#             */
-/*   Updated: 2022/02/14 19:27:41 by ayajirob@st      ###   ########.fr       */
+/*   Updated: 2022/02/18 16:05:43 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
-
-size_t	ft_strlen(const char *s)
-{
-	int	length;
-
-	length = 0;
-	if (!s)
-		return (0);
-	while (*s++ != '\0')
-		length++;
-	return (length);
-}
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
-{
-	size_t	src_length;
-
-	src_length = ft_strlen(src);
-	if (dstsize != 0)
-	{
-		while (dstsize-- > 1 && *src)
-		{
-			*dst++ = *src++;
-		}
-		*dst = '\0';
-	}
-	return (src_length);
-}
-
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
-{
-	size_t	l;
-	size_t	m;
-
-	l = 0;
-	m = 0;
-	while (dst[l] && l < dstsize)
-	{
-		l++;
-	}
-	while (src[m] && (l + m + 1) < dstsize)
-	{
-		dst[l + m] = src[m];
-		m++;
-	}
-	if (l < dstsize)
-	{
-		dst[l + m] = '\0';
-	}
-	return (l + ft_strlen(src));
-}
+#include "libft.h"
 
 char	*ft_strjoin_free(char *s1, char *s2)
 {

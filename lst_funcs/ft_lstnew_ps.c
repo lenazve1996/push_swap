@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_lstnew_ps.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/25 15:17:53 by ayajirob@st       #+#    #+#             */
-/*   Updated: 2022/02/17 14:51:11 by ayajirob@st      ###   ########.fr       */
+/*   Created: 2022/01/23 18:44:01 by ayajirob@st       #+#    #+#             */
+/*   Updated: 2022/02/18 16:10:56 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
-int	ft_lstsize(t_lst *lst)
+t_lst	*ft_lstnew_ps(int numb)
 {
-	int	list_length;
+	t_lst	*new_element;
 
-	if (lst == NULL)
-		return (0);
-	list_length = 1;
-	while (lst->next != NULL)
-	{
-		lst = lst->next;
-		list_length++;
-	}
-	return (list_length);
+	new_element = (t_lst *)malloc(sizeof(t_lst));
+	if (!new_element)
+		return (NULL);
+	new_element->numb = numb;
+	new_element->up = -1;
+	new_element->move = -1;
+	new_element->sum = -1;
+	new_element->index = -1;
+	new_element->next = NULL;
+	return (new_element);
 }

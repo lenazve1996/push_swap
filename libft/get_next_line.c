@@ -1,35 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 18:34:14 by ayajirob          #+#    #+#             */
-/*   Updated: 2022/02/17 14:51:48 by ayajirob@st      ###   ########.fr       */
+/*   Updated: 2022/02/18 16:05:25 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
-
-char	*ft_strdup(const char *s1)
-{
-	int		len;
-	int		n;
-	char	*buf;
-
-	len = ft_strlen(s1);
-	buf = (char *)malloc(len + 1 * sizeof(char));
-	n = 0;
-	if (buf == NULL)
-		return (NULL);
-	while (n <= len)
-	{
-		buf[n] = s1[n];
-		n++;
-	}
-	return (buf);
-}
+#include "libft.h"
 
 int	ft_strchr_int(const char *s, int c)
 {

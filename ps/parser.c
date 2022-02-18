@@ -6,11 +6,11 @@
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 18:33:03 by ayajirob@st       #+#    #+#             */
-/*   Updated: 2022/02/18 13:22:35 by ayajirob@st      ###   ########.fr       */
+/*   Updated: 2022/02/18 16:20:29 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker_bonus.h"
+#include "../check/checker_bonus.h"
 
 int	ft_check_order(t_lst **stack_a)
 {

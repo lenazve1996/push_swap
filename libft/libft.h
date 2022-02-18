@@ -6,7 +6,7 @@
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 14:36:57 by ayajirob          #+#    #+#             */
-/*   Updated: 2022/02/18 13:32:02 by ayajirob@st      ###   ########.fr       */
+/*   Updated: 2022/02/18 16:04:41 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <sys/types.h>
+# include <sys/uio.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 void			ft_bzero(void *s, size_t n);
 void			*ft_calloc(size_t count, size_t size);
@@ -55,5 +61,12 @@ int				ft_putstr_ret(char *s, int fd);
 int				ft_isdigit_orsign(int ch);
 int				ft_free_char_arr(char **arr, int arr_free_flag, int ret_flag);
 int				ft_strcmp(const char *s1, const char *s2);
+
+char			*get_next_line(int fd);
+char			*ft_strjoin_free(char *s1, char *s2);
+char			*ft_substr_free(char *s, unsigned int start, size_t len);
+int				ft_strchr_int(const char *s, int c);
+char			*ft_reading(char *buffer, int fd);
+char			*ft_filling_line(char **buf, int fd, int index);
 
 #endif

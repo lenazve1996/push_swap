@@ -6,7 +6,7 @@
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:44:54 by ayajirob@st       #+#    #+#             */
-/*   Updated: 2022/02/18 12:06:17 by ayajirob@st      ###   ########.fr       */
+/*   Updated: 2022/02/18 18:30:56 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,18 @@ void	ft_rrb(t_lst **stack_b, int write_flag);
 void	ft_rrr(t_lst **stack_a, t_lst **stack_b, int write_flag);
 void	ft_print_result(t_lst **stack_a);
 void	ft_lstclear(t_lst **lst);
+t_lst	*ft_find_numb(t_lst **stack_a, int index);
+int		ft_process_two_numbs(t_lst **stack_a);
+int		ft_process_three_numbs(t_lst **stack_a);
+int		ft_process_four_numbs(t_lst **stack_a);
+int		ft_process_five_numbs(t_lst **stack_a);
+void	ft_define_up_index(t_lst **stack);
+void	ft_define_indexes(t_lst **stack_a);
+void	ft_define_move_index(t_lst **stack_a, t_lst **stack_b);
+void	ft_define_up_index(t_lst **stack);
+void	ft_define_sum_index(t_lst **stack_b);
+void	ft_sort(t_lst **stack_a, t_lst **stack_b);
+void	ft_fill_stack_b(t_lst **stack_a, t_lst **stack_b);
+void	ft_ss(t_lst **stack_a, t_lst **stack_b, int write_flag);
 
 #endif
