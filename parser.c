@@ -6,7 +6,7 @@
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 18:33:03 by ayajirob@st       #+#    #+#             */
-/*   Updated: 2022/02/17 19:07:07 by ayajirob@st      ###   ########.fr       */
+/*   Updated: 2022/02/18 13:22:35 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	ft_check_characters(char *str)
 static int	ft_fill_stack_a(char *str, t_lst **stack_a)
 {
 	long long int	numb;
-	t_lst	*new;
+	t_lst			*new;
 
 	if (ft_check_characters(str) == 1)
 		return (1);
@@ -89,13 +89,10 @@ int	ft_parser(int ac, char **av, t_lst **stack_a)
 		while (tmp_arr[c] != NULL)
 		{
 			if (ft_fill_stack_a(tmp_arr[c], stack_a) == 1)
-			{
-				ft_free_char_arr(tmp_arr, 1);
-				return (1);
-			}
+				return (ft_free_char_arr(tmp_arr, 1, 1));
 			c++;
 		}
-		ft_free_char_arr(tmp_arr, 1);
+		ft_free_char_arr(tmp_arr, 1, 0);
 		i++;
 	}
 	if (ft_find_int_doubles(stack_a) == 1)

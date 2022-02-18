@@ -6,7 +6,7 @@
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 14:36:57 by ayajirob          #+#    #+#             */
-/*   Updated: 2022/02/17 14:41:54 by ayajirob@st      ###   ########.fr       */
+/*   Updated: 2022/02/18 13:32:02 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void			ft_putendl_fd(char *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
 int				ft_putstr_ret(char *s, int fd);
 int				ft_isdigit_orsign(int ch);
-void			ft_free_char_arr(char **arr, int arr_free_flag);
+int				ft_free_char_arr(char **arr, int arr_free_flag, int ret_flag);
+int				ft_strcmp(const char *s1, const char *s2);
 
 #endif

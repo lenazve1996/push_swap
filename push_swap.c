@@ -6,37 +6,11 @@
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 13:06:43 by ayajirob@st       #+#    #+#             */
-/*   Updated: 2022/02/17 19:38:54 by ayajirob@st      ###   ########.fr       */
+/*   Updated: 2022/02/18 14:58:15 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	ft_printf_index(t_lst **stack_a)
-{
-	t_lst *tmp;
-
-	if ((*stack_a) == NULL)
-		printf("FALED, not stack\n");
-	else
-	{
-		tmp = *stack_a;
-		while (tmp->next != NULL)
-		{
-			printf("n-> %3d 	", tmp->numb);
-			printf("i-> %3d		", tmp->index);
-			printf("u-> %3d		", tmp->up);
-			printf("m-> %3d		", tmp->move);
-			printf("s-> %3d		\n", tmp->sum);
-			tmp = tmp->next;
-		}
-		printf("n-> %3d 	", tmp->numb);
-		printf("i-> %3d		", tmp->index);
-		printf("u-> %3d		", tmp->up);
-		printf("m-> %3d		", tmp->move);
-		printf("s-> %3d		\n\n", tmp->sum);
-	}
-}
 
 t_lst	*ft_find_numb(t_lst **stack_a, int index)
 {
@@ -58,7 +32,7 @@ int	ft_process_two_numbs(t_lst **stack_a)
 	return (0);
 }
 
-int ft_process_three_numbs(t_lst **stack_a)
+int	ft_process_three_numbs(t_lst **stack_a)
 {
 	int	a;	
 	int	b;	
@@ -74,17 +48,11 @@ int ft_process_three_numbs(t_lst **stack_a)
 		return (0);
 	}
 	else if (a > b && b < c && a < c)
-	{
 		ft_sa(stack_a, 1);
-	}
 	else if (a < b && a > c && b > c)
-	{
 		ft_rra(stack_a, 1);
-	}
 	else if (a > b && a > c && b < c)
-	{
 		ft_ra(stack_a, 1);
-	}
 	else if (a > b & a > c && b > c)
 	{
 		ft_sa(stack_a, 1);
@@ -93,21 +61,42 @@ int ft_process_three_numbs(t_lst **stack_a)
 	return (0);
 }
 
-void	ft_define_index(t_lst **stack_a)
+void	ft_put_index(t_lst *tmp, int n)
 {
-	t_lst	*tmp;
 	t_lst	*next;
-	int		n;
-	int		len;
 	int		stop;
 
+	next = tmp->next;
 	stop = 0;
+	while (next != NULL && stop != 1)
+	{
+		if (next->numb < tmp->numb)
+		{
+			if (next->index == -1)
+			{
+				next->index = n;
+				tmp->index = -1;
+				tmp = next;
+			}
+		}
+		if (next->next != NULL)
+			next = next->next;
+		else
+			stop = 1;
+	}
+}
+
+void	ft_define_indexes(t_lst **stack_a)
+{
+	t_lst	*tmp;
+	int		n;
+	int		len;
+
 	n = 0;
 	len = ft_lstsize(*stack_a);
 	while (n < len)
 	{
 		tmp = *stack_a;
-		stop = 0;
 		if (tmp->index == -1)
 			tmp->index = n;
 		else
@@ -116,23 +105,7 @@ void	ft_define_index(t_lst **stack_a)
 				tmp = tmp->next;
 			tmp->index = n;
 		}
-		next = tmp->next;
-		while (next != NULL && stop != 1)
-		{
-			if (next->numb < tmp->numb)
-			{
-				if (next->index == -1)
-				{
-					next->index = n;
-					tmp->index = -1;
-					tmp = next;
-				}
-			}
-			if (next->next != NULL)
-				next = next->next;
-			else
-				stop = 1;
-		}
+		ft_put_index(tmp, n);
 		n++;
 	}
 }
@@ -143,7 +116,7 @@ int	ft_process_five_numbs(t_lst **stack_a)
 	t_lst	*stack_b;
 
 	stack_b = NULL;
-	ft_define_index(stack_a);
+	ft_define_indexes(stack_a);
 	min = ft_find_numb(stack_a, 0);
 	if (min->next == NULL)
 		ft_rra(stack_a, 1);
@@ -163,19 +136,16 @@ int	ft_process_five_numbs(t_lst **stack_a)
 	return (0);
 }
 
-void	ft_fill_stack_b(t_lst **stack_a, t_lst **stack_b)
+void	ft_push_numbs(t_lst **stack_a, t_lst **stack_b, int n, int i)
 {
 	t_lst	*median;
 	t_lst	*max;
 	t_lst	*min;
-	int		n;
-	int		i;
 
-	n = ft_lstsize(*stack_a);
-	i = 0;
 	min = ft_find_numb(stack_a, 0);
 	max = ft_find_numb(stack_a, n - 1);
-	median =  ft_find_numb(stack_a, n / 2);
+	median = ft_find_numb(stack_a, n / 2);
+	n = ft_lstsize(*stack_a);
 	while ((*stack_a) != NULL && i < n)
 	{
 		if ((*stack_a) != min && (*stack_a) != max && (*stack_a) != median)
@@ -193,9 +163,17 @@ void	ft_fill_stack_b(t_lst **stack_a, t_lst **stack_b)
 			ft_ra(stack_a, 1);
 		i++;
 	}
+}
+
+void	ft_fill_stack_b(t_lst **stack_a, t_lst **stack_b)
+{
+	int		n;
+	int		i;
+
+	i = 0;
+	n = ft_lstsize(*stack_a);
+	ft_push_numbs(stack_a, stack_b, n, i);
 	ft_process_three_numbs(stack_a);
-	//ft_ra(stack_a, 1);
-	//ft_ra(stack_a, 1);
 }
 
 void	ft_define_move_index(t_lst **stack_a, t_lst **stack_b)
@@ -272,6 +250,50 @@ void	ft_define_sum_index(t_lst **stack_b)
 	}
 }
 
+void	ft_move_both_stack(t_lst **stack_a, t_lst **stack_b, t_lst *min_lst)
+{
+	if (min_lst->up > 0 && min_lst->move > 0)
+	{
+		ft_rr(stack_a, stack_b, 1);
+		min_lst->up--;
+		min_lst->move--;
+	}
+	else if (min_lst->up < 0 && min_lst->move < 0)
+	{
+		ft_rrr(stack_a, stack_b, 1);
+		min_lst->up++;
+		min_lst->move++;
+	}
+}
+
+void	ft_move_stack_b(t_lst **stack_b, t_lst *min_lst)
+{
+	if (min_lst->up > 0)
+	{
+		ft_rb(stack_b, 1);
+		min_lst->up--;
+	}
+	else if (min_lst->up < 0)
+	{
+		ft_rrb(stack_b, 1);
+		min_lst->up++;
+	}
+}
+
+void	ft_move_stack_a(t_lst **stack_a, t_lst *min_lst)
+{
+	if (min_lst->move > 0)
+	{
+		ft_ra(stack_a, 1);
+		min_lst->move--;
+	}
+	else if (min_lst->move < 0)
+	{
+		ft_rra(stack_a, 1);
+		min_lst->move++;
+	}
+}
+
 void	ft_sort(t_lst **stack_a, t_lst **stack_b)
 {
 	t_lst	*tmp;
@@ -282,46 +304,41 @@ void	ft_sort(t_lst **stack_a, t_lst **stack_b)
 	tmp = tmp->next;
 	while (tmp != NULL)
 	{
-		if (tmp->sum <= min_lst->sum)
+		if (tmp->sum < min_lst->sum)
 			min_lst = tmp;
 		tmp = tmp->next;
 	}
 	while (min_lst->up != 0 || min_lst->move != 0)
 	{
-		if (min_lst->up > 0 && min_lst->move > 0)
-		{
-			ft_rr(stack_a, stack_b, 1);
-			min_lst->up--;
-			min_lst->move--;
-		}
-		else if (min_lst->up < 0 && min_lst->move < 0)
-		{
-			ft_rrr(stack_a, stack_b, 1);
-			min_lst->up++;
-			min_lst->move++;
-		}
-		else if (min_lst->up > 0)
-		{
-			ft_rb(stack_b, 1);
-			min_lst->up--;
-		}
-		else if (min_lst->move > 0)
-		{
-			ft_ra(stack_a, 1);
-			min_lst->move--;
-		}
-		else if (min_lst->up < 0)
-		{
-			ft_rrb(stack_b, 1);
-			min_lst->up++;
-		}
-		else if (min_lst->move < 0)
-		{
-			ft_rra(stack_a, 1);
-			min_lst->move++;
-		}
+		if ((min_lst->up > 0 && min_lst->move > 0) || (min_lst->up < 0 && \
+		min_lst->move < 0))
+			ft_move_both_stack(stack_a, stack_b, min_lst);
+		else if (min_lst->up > 0 || min_lst->up < 0)
+			ft_move_stack_b(stack_b, min_lst);
+		else if (min_lst->move > 0 || min_lst->move < 0)
+			ft_move_stack_a(stack_a, min_lst);
 	}
 	ft_pa(stack_b, stack_a, 1);
+}
+
+void	ft_move_sorted_stack(t_lst **stack_a)
+{
+	t_lst	*tmp;
+
+	ft_define_up_index(stack_a);
+	tmp = (*stack_a);
+	while (tmp->index != 0)
+		tmp = tmp->next;
+	while (tmp->up > 0)
+	{
+		ft_ra(stack_a, 1);
+		tmp->up--;
+	}
+	while (tmp->up < 0)
+	{
+		ft_rra(stack_a, 1);
+		tmp->up++;
+	}
 }
 
 int	ft_process_big_numbs(t_lst **stack_a)
@@ -329,28 +346,17 @@ int	ft_process_big_numbs(t_lst **stack_a)
 	t_lst	*stack_b;
 
 	stack_b = NULL;
-	ft_define_index(stack_a);
+	ft_define_indexes(stack_a);
 	ft_fill_stack_b(stack_a, &stack_b);
-	//printf("STACK_A\n");
-	//ft_printf_index(stack_a);
-	//printf("STACK_B\n\n");
-	//ft_printf_index(&stack_b);
 	while (stack_b != NULL)
 	{
 		ft_define_up_index(stack_a);
 		ft_define_up_index(&stack_b);
 		ft_define_move_index(stack_a, &stack_b);
 		ft_define_sum_index(&stack_b);
-		//printf("STACK_A\n");
-		//ft_printf_index(stack_a);
-		//printf("STACK_B\n\n");
-		//ft_printf_index(&stack_b);
 		ft_sort(stack_a, &stack_b);
 	}
-	while ((*stack_a)->index != 0)
-	{
-		ft_ra(stack_a, 1);
-	}
+	ft_move_sorted_stack(stack_a);
 	return (0);
 }
 
@@ -360,7 +366,7 @@ int	ft_process_four_numbs(t_lst **stack_a)
 	t_lst	*stack_b;
 
 	stack_b = NULL;
-	ft_define_index(stack_a);
+	ft_define_indexes(stack_a);
 	min = ft_find_numb(stack_a, 0);
 	while ((*stack_a)->index != 0)
 		ft_ra(stack_a, 1);
@@ -418,7 +424,7 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	ft_choose_algorithm(&stack_a);
-	ft_lstclear(&stack_a);
 	//ft_print_result(&stack_a);
+	ft_lstclear(&stack_a);
 	return (0);
 }

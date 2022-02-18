@@ -6,7 +6,7 @@
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 18:24:28 by ayajirob@st       #+#    #+#             */
-/*   Updated: 2022/02/17 19:07:55 by ayajirob@st      ###   ########.fr       */
+/*   Updated: 2022/02/18 13:36:27 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,36 +35,31 @@ void	ft_save_data(char **instructions)
 	}
 }
 
-void	ft_execute_instr(char **instructions, t_lst **stack_a, t_lst **stack_b)
+void	ft_execute_instr(char **instr, t_lst **st_a, t_lst **st_b, int numb)
 {
-	int	instr_numb;
-	int	len;
-
-	instr_numb = 0;
-	while (instructions[instr_numb] != NULL)
+	while (instr[numb] != NULL)
 	{
-		len = ft_strlen(instructions[instr_numb]);
-		if (ft_strncmp(instructions[instr_numb], "sa\n", len) == 0)
-			ft_sa(stack_a, 0);
-		else if (ft_strncmp(instructions[instr_numb], "sb\n", len) == 0)
-			ft_sb(stack_a, 0);
-		else if (ft_strncmp(instructions[instr_numb], "pa\n", len) == 0)
-			ft_pa(stack_b, stack_a, 0);
-		else if (ft_strncmp(instructions[instr_numb], "pb\n", len) == 0)
-			ft_pb(stack_b, stack_a, 0);
-		else if (ft_strncmp(instructions[instr_numb], "ra\n", len) == 0)
-			ft_ra(stack_a, 0);
-		else if (ft_strncmp(instructions[instr_numb], "rb\n", len) == 0)
-			ft_rb(stack_b, 0);
-		else if (ft_strncmp(instructions[instr_numb], "rr\n", len) == 0)
-			ft_rr(stack_a, stack_b, 0);
-		else if (ft_strncmp(instructions[instr_numb], "rra\n", len) == 0)
-			ft_rra(stack_a, 0);
-		else if (ft_strncmp(instructions[instr_numb], "rrb\n", len) == 0)
-			ft_rrb(stack_b, 0);
-		else if (ft_strncmp(instructions[instr_numb], "rrr\n", len) == 0)
-			ft_rrr(stack_a, stack_b, 0);
-		instr_numb++;
+		if (ft_strcmp(instr[numb], "sa\n") == 0)
+			ft_sa(st_a, 0);
+		else if (ft_strcmp(instr[numb], "sb\n") == 0)
+			ft_sb(st_a, 0);
+		else if (ft_strcmp(instr[numb], "pa\n") == 0)
+			ft_pa(st_b, st_a, 0);
+		else if (ft_strcmp(instr[numb], "pb\n") == 0)
+			ft_pb(st_b, st_a, 0);
+		else if (ft_strcmp(instr[numb], "ra\n") == 0)
+			ft_ra(st_a, 0);
+		else if (ft_strcmp(instr[numb], "rb\n") == 0)
+			ft_rb(st_b, 0);
+		else if (ft_strcmp(instr[numb], "rr\n") == 0)
+			ft_rr(st_a, st_b, 0);
+		else if (ft_strcmp(instr[numb], "rra\n") == 0)
+			ft_rra(st_a, 0);
+		else if (ft_strcmp(instr[numb], "rrb\n") == 0)
+			ft_rrb(st_b, 0);
+		else if (ft_strcmp(instr[numb], "rrr\n") == 0)
+			ft_rrr(st_a, st_b, 0);
+		numb++;
 	}
 }
 
@@ -73,7 +68,9 @@ int	main(int argc, char **argv)
 	t_lst	*stack_a;
 	t_lst	*stack_b;
 	char	*instructions[5500];
+	int		numb;
 
+	numb = 0;
 	stack_a = NULL;
 	stack_b = NULL;
 	if (argc == 1)
@@ -83,8 +80,8 @@ int	main(int argc, char **argv)
 	if (ft_check_order(&stack_a) == 1)
 		return (0);
 	ft_save_data(instructions);
-	ft_execute_instr(instructions, &stack_a, &stack_b);
-	ft_free_char_arr(instructions, 0);
+	ft_execute_instr(instructions, &stack_a, &stack_b, numb);
+	ft_free_char_arr(instructions, 0, 0);
 	if (ft_check_order(&stack_a) && ft_check_empty_stack(&stack_b))
 		write(1, "OK\n", 3);
 	else
