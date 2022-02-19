@@ -6,7 +6,7 @@
 /*   By: ayajirob@student.42.fr <ayajirob>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 13:06:43 by ayajirob@st       #+#    #+#             */
-/*   Updated: 2022/02/18 19:13:41 by ayajirob@st      ###   ########.fr       */
+/*   Updated: 2022/02/19 12:14:51 by ayajirob@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,6 @@ int	ft_choose_algorithm(t_lst **stack_a)
 	else if (n > 5)
 		return (ft_process_big_numbs(stack_a));
 	return (0);
-}
-
-void	ft_print_result(t_lst **stack_a)
-{
-	while ((*stack_a)->next != NULL)
-	{
-		printf("%d ", (*stack_a)->numb);
-		*stack_a = (*stack_a)->next;
-	}
-	printf("%d\n", (*stack_a)->numb);
 }
 
 int	main(int argc, char **argv)

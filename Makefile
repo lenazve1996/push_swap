@@ -16,16 +16,16 @@ OBJ = $(SRC_PS:.c=.o)
 OBJ_CHECKER = $(SRC_CHECKER:.c=.o)
 D_FILES = $(SRC_PS:.c=.d) $(SRC_CHECKER:.c=.d)
 
-all : libft.a $(NAME_PS)
+all : libmake $(NAME_PS)
 
 $(NAME_PS) : $(OBJ)
 		$(CC) $(FLAGS) libft.a $(OBJ) -o $@
 
-libft.a :
+libmake :
 		cd ./libft && make
 		cp ./libft/libft.a ./
 
-bonus : libft.a $(CHECKER)
+bonus : libmake $(CHECKER)
 
 $(CHECKER) : $(OBJ_CHECKER)
 		$(CC) $(FLAGS) libft.a $(OBJ_CHECKER) -o $@
@@ -45,4 +45,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus libmake
